@@ -40,38 +40,38 @@ router.get('/fetch', function (req, res, next) {
 router.post('/import', function (req, res, next) {
     console.log(req.files);
 
-    // var stream = fs.createReadStream("\data\\transactions.csv");
-    // var events = [];
-    // csv.fromStream(stream, { headers: true })
-    //     .on("data", function (data) {
-    //         events.unshift({
-    //             EventId: uuid.v4(),
-    //             Type: 'TransactionOccurred',
-    //             Data: new Buffer(JSON.stringify(data)),
-    //             IsJson: true
-    //         });
-    //     })
-    //     .on("end", function () {
-    //         console.log("done");
-    //         var connection = ges({ host: '127.0.0.1' });
-    //         connection.on('connect', function () {
-    //             console.log('connecting to geteventstore...');
-    //             var streamId = 'transactionstream-' + uuid.v4();
-    //             connection.readStreamEventsBackward(streamId, { start: -1, count: 1, resolveLinkTos: true }, function (err, readResult) {
-    //                 if (err) return console.log('Ooops!', err);
-    //                 var expectedVersion = readResult.LastEventNumber;
-    //                 var appendData = {
-    //                     expectedVersion: expectedVersion,
-    //                     events: events
-    //                 };
-    //                 connection.appendToStream(streamId, appendData, function (err, appendResult) {
-    //                     if (err) return console.log('Oops!', err);
-    //                     res.json(appendResult);
-    //                 });
+    var stream = fs.createReadStream("./uploads/transactions.csv");
+    var events = [];
+    csv.fromStream(stream, { headers: true })
+        .on("data", function (data) {
+            events.unshift({
+                EventId: uuid.v4(),
+                Type: 'ActualImported',
+                Data: new Buffer(JSON.stringify(data)),
+                IsJson: true
+            });
+        })
+        .on("end", function () {
+            console.log("done");
+            var connection = ges({ host: '127.0.0.1' });
+            connection.on('connect', function () {
+                console.log('connecting to geteventstore...');
+                var streamId = 'transactionstream-' + uuid.v4();
+                connection.readStreamEventsBackward(streamId, { start: -1, count: 1, resolveLinkTos: true }, function (err, readResult) {
+                    if (err) return console.log('Ooops!', err);
+                    var expectedVersion = readResult.LastEventNumber;
+                    var appendData = {
+                        expectedVersion: expectedVersion,
+                        events: events
+                    };
+                    connection.appendToStream(streamId, appendData, function (err, appendResult) {
+                        if (err) return console.log('Oops!', err);
+                        res.json(appendResult);
+                    });
 
-    //             });
-    //         });
-    //     });
+                });
+            });
+        });
 });
 
 
