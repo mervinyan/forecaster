@@ -56,6 +56,7 @@ block content
                         |     
                         | Add Account
                 form#addAccountForm.form-horizontal(name='add_account' method='post' action='/account/add' novalidate)
+                    div#messages
                     div.modal-body
                         div.form-group
                             label.col-md-4.control-label(for='name') Name
@@ -338,7 +339,7 @@ block scripts
                             setTimeout(function() {$('#datatable-accounts').DataTable().ajax.reload();}, 1000);
                         },
                         error: function(jqXHR, textStatus, errorThrown) {
-                            alert(errorThrown);
+                            $('#mess').html('<p>status code: '+jqXHR.status+'</p><p>errorThrown: ' + errorThrown + '</p><p>jqXHR.responseText:</p><div>'+jqXHR.responseText + '</div>');
                         }
                     });
                 }
