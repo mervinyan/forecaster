@@ -193,21 +193,22 @@ html(lang="en")
           div.sidebar-nav.navbar-collapse
             ul#side-menu.nav                                   
               li
-                a(href="/account")
+                a(href="/accounts")
                   i.fa.fa-fw
                   | Accounts
               li
-                a(href="/transactions/cashflow")
+                a(href="") 
                   i.fa.fa-fw
-                  | Cashflow Forecasts
-              li
-                a(href="/transactions/incomeforecasts")
-                  i.fa.fa-fw
-                  | Income Forecasts  
-              li
-                a(href="/transactions/expenseforecasts")
-                  i.fa.fa-fw
-                  | Expense Forecasts                                  
+                  | Transactions       
+                ul.nav.nav-second-level                  
+                  li
+                    a(href="/forecasts")
+                      i.fa.fa-fw
+                      | Forecasts
+                  li
+                    a(href="/actuals")
+                      i.fa.fa-fw
+                      | Actuals                                  
                        
       div#page-wrapper
         block content

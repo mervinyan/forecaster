@@ -55,7 +55,7 @@ block content
                         i.fa.fa-calendar-plus-o
                         |     
                         | Add Account
-                form#addAccountForm.form-horizontal(name='add_account' method='post' action='/account/add' novalidate)
+                form#addAccountForm.form-horizontal(name='add_account' method='post' action='/accounts/add' novalidate)
                     div#messages
                     div.modal-body
                         div.form-group
@@ -242,7 +242,7 @@ block scripts
                 "bAutoWidth": true,
                 "bProcessing": false,
                 "iDisplayLength": 10,
-                "ajax": "/account/fetch",
+                "ajax": "/accounts/fetch",
                 "columns": [
                     {"data": "name"},
                     {"data": "status"},

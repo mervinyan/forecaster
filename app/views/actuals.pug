@@ -1,0 +1,138 @@
+extends layout
+
+block links
+
+    <!-- C3 Chart CSS -->
+    link(href='/bower_components/c3/c3.css' rel='stylesheet' type='text/css')
+    
+    link(href="/stylesheets/style.css" rel="stylesheet" type="text/css")
+    
+    <!-- Bootstrap Core CSS -->
+    link(href="/bower_components/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet" type="text/css")
+
+    <!-- MetisMenu CSS -->
+    link(href="/bower_components/metisMenu/dist/metisMenu.min.css" rel="stylesheet" type="text/css")
+
+    <!-- DataTables CSS -->
+    link(href="/bower_components/datatables-plugins/integration/bootstrap/3/dataTables.bootstrap.css" rel="stylesheet" type="text/css")
+
+    <!-- DataTables JQuery CSS -->
+    link(href="/bower_components/datatables-plugins/integration/jqueryui/dataTables.jqueryui.css" rel="stylesheet" type="text/css")
+
+    <!-- DataTables Responsive CSS -->
+    link(href="bower_components/datatables-responsive/css/responsive.dataTables.scss" rel="stylesheet")
+    
+    <!-- Custom CSS -->
+    link(href="/bower_components/sb-admin-2/css/sb-admin-2.css" rel="stylesheet" type="text/css")
+
+    <!-- Custom Fonts -->
+    link(href="/bower_components/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css")
+    
+block content
+    div.row
+        div.col-md-12
+            h1.page-header #{title}
+    div.row
+        div.col-md-12
+            div.panel.panel-default
+                div.panel-heading
+                    form#importActualsForm.form-inline(name='import_actuals' method='post' action='/actuals/import' enctype='multipart/form-data' novalidate)
+                        div.form-group
+                            input(type="file" accept=".csv")
+                        button#import.btn.btn-primary(type="submit") Import Acutals
+                        span#status 
+                div.panel-body
+                    div.dataTable_wrapper
+                        table#datatable-actuals.table.table-bordered
+                            thead
+                                tr
+                                    th Date
+                                    th Account
+                                    th Amount
+                                    th Transaction Type
+                                    th Description
+                                    th Original Description
+                                    th Category
+                                    th Labels
+                                    th Notes
+                                    
+                            tbody
+                                        
+        
+block scripts
+    <!-- D3 Chart JavaScript -->
+    script(src='/bower_components/d3/d3.min.js' charset='utf-8' type='text/javascript')
+
+    <!-- C3 Chart JavaScript -->
+    script(src='/bower_components/c3/c3.min.js' type='text/javascript')
+
+    <!-- jQuery -->
+    script(src="/bower_components/jquery/dist/jquery.min.js" type="text/javascript")
+    script(src="http://cdnjs.cloudflare.com/ajax/libs/jquery.form/3.51/jquery.form.min.js"  type="text/javascript")
+    
+    <!-- jQuery Validation JavaScript -->
+    script(src="/bower_components/jquery-validation/dist/jquery.validate.min.js" type="text/javascript")
+    script(src="/bower_components/jquery-validation/dist/additional-methods.min.js" type="text/javascript")
+
+    <!-- Bootstrap Core JavaScript -->
+    script(src="/bower_components/bootstrap/dist/js/bootstrap.min.js" type="text/javascript")
+
+    <!-- Metis Menu Plugin JavaScript -->
+    script(src="/bower_components/metisMenu/dist/metisMenu.min.js" type="text/javascript")
+
+    <!-- DataTables JavaScript -->
+    script(src="/bower_components/datatables/media/js/jquery.dataTables.min.js" type="text/javascript")
+    script(src="/bower_components/datatables-plugins/integration/bootstrap/3/dataTables.bootstrap.min.js" type="text/javascript")
+
+    <!-- Custom Theme JavaScript -->
+    script(src="/bower_components/sb-admin-2/js/sb-admin-2.js" type="text/javascript")
+
+    script(type="text/javascript").
+        $(document).ready(function() {
+            $('#datatable-actuals').DataTable({
+                "responsive": true,
+                "bPaginate": true,
+                "bJQueryUI": false,
+                "bLengthChange": false,
+                "bFilter": false,
+                "bSort": false,
+                "bInfo": true,
+                "bAutoWidth": true,
+                "bProcessing": true,
+                "iDisplayLength": 10,
+                "ajax": "/actuals/fetch",
+                "columns": [
+                    {"data": "date"},
+                    {"data": "account"},
+                    {"data": "amount"},
+                    {"data": "transactiontype"},
+                    {"data": "description"},                            
+                    {"data": "originaldescription"},
+                    {"data": "category"},                            
+                    {"data": "labels"},
+                    {"data": "notes"},
+                ],
+                "columnDefs": [
+                    {
+                        "className": "dt-body-right",
+                        "targets": [2] 
+                    }
+                ],
+            });
+            
+            $("#importActualsForm").submit(function() {
+                $("#status").empty().text("File is uploading...");
+                $(this).ajaxSubmit({
+                    error: function(xhr) {
+                        status('Error: ' + xhr.status);
+                    },
+                    success: function(response) {
+                        $("#status").empty().text(response);
+                        console.log(response);
+                    }
+                });
+                return false;
+            });
+
+        });
+                                      

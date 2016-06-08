@@ -19,6 +19,7 @@
     "jsoneditor": "^5.5.5",
     "moment": "^2.13.0",
     "morgan": "^1.7.0",
+    "multer": "^1.1.0",
     "node-uuid": "*",
     "numeral": "^1.5.3",
     "pug": "^2.0.0-alpha6",
