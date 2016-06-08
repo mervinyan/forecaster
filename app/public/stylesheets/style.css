@@ -1,0 +1,36 @@
+body {
+  /*padding: 50px;*/
+  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+}
+
+a {
+  color: #00B7FF;
+}
+
+pre {outline: 1px solid #ccc; padding: 5px; margin: 5px; }
+.string { color: green; }
+.number { color: darkorange; }
+.boolean { color: blue; }
+.null { color: magenta; }
+.key { color: red; }
+
+.c3-region.region-period1 {
+  fill: red;
+ }
+
+.c3-region.region-period2 {
+  fill: blue;
+}
+
+.c3-region.region-period3 {
+  fill: yellow;
+}
+
+tr.group,
+tr.group:hover {
+    background-color: #ddd !important;
+}
+
+#jsoneditor {
+  height: 500px;
+}
