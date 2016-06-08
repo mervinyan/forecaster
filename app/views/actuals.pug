@@ -38,7 +38,7 @@ block content
                 div.panel-heading
                     form#importActualsForm.form-inline(name='import_actuals' method='post' action='/actuals/import' enctype='multipart/form-data' novalidate)
                         div.form-group
-                            input(type="file" accept=".csv")
+                            input(type="file" accept=".csv" name="actuals")
                         button#import.btn.btn-primary(type="submit") Import Acutals
                         span#status 
                 div.panel-body
