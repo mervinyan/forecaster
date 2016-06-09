@@ -1,17 +1,11 @@
 extends layout
 
 block links
-
-    <!-- C3 Chart CSS -->
-    link(href='/bower_components/c3/c3.css' rel='stylesheet' type='text/css')
     
     link(href="/stylesheets/style.css" rel="stylesheet" type="text/css")
     
     <!-- Bootstrap Core CSS -->
     link(href="/bower_components/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet" type="text/css")
-
-    <!-- MetisMenu CSS -->
-    link(href="/bower_components/metisMenu/dist/metisMenu.min.css" rel="stylesheet" type="text/css")
 
     <!-- DataTables CSS -->
     link(href="/bower_components/datatables-plugins/integration/bootstrap/3/dataTables.bootstrap.css" rel="stylesheet" type="text/css")
@@ -19,9 +13,6 @@ block links
     <!-- DataTables Responsive CSS -->
     link(href="/bower_components/datatables-responsive/css/responsive.dataTables.scss" rel="stylesheet")
     
-    <!-- Custom CSS -->
-    link(href="/bower_components/sb-admin-2/css/sb-admin-2.css" rel="stylesheet" type="text/css")
-
     <!-- Custom Fonts -->
     link(href="/bower_components/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css")
 
@@ -32,18 +23,15 @@ block content
 
     div.row
         div.col-md-12
-            div.panel.panel-default
-                div.panel-heading
-                    button#addAccount.btn.btn-primary(data-toggle="modal" data-target="#addAccountModal") Add Account
-                div.panel-body
-                    div.dataTable_wrapper
-                        table#datatable-accounts.table.table-hover
-                            thead
-                                tr
-                                    th Name
-                                    th Status
-                                    th Type
-                            tbody
+            button#addAccount.btn.btn-primary(data-toggle="modal" data-target="#addAccountModal") Add Account
+            div.dataTable_wrapper
+                table#datatable-accounts.table.table-bordered.table-responsive
+                    thead
+                        tr
+                            th Name
+                            th Status
+                            th Type
+                    tbody
 
     div#addAccountModal.modal.fade(tabIndex="-1" role="dialog" aria-labelledby="addAccountModalLabel")
         div.modal-dialog(role="document")
@@ -59,9 +47,13 @@ block content
                     div#messages
                     div.modal-body
                         div.form-group
-                            label.col-md-4.control-label(for='name') Name
+                            label.col-md-4.control-label(for='account_name') Name
                             div.col-md-8
-                                input#name.form-control(type='text', name='name')
+                                input#account_name.form-control(type='text', name='account_name')
+                        div.form-group
+                            label.col-md-4.control-label(for='name') Mint Account Name
+                            div.col-md-8
+                                input#mint_account_name.form-control(type='text', name='mint_account_name')
                         div.form-group
                             label.col-md-4.control-label(for='statusOptions') Status
                             div.col-md-8.dropdown
@@ -203,12 +195,6 @@ block content
                         button#submit1.btn.btn-primary(type="button") Save      
 
 block scripts
-    <!-- D3 Chart JavaScript -->
-    script(src='/bower_components/d3/d3.min.js' charset='utf-8' type='text/javascript')
-
-    <!-- C3 Chart JavaScript -->
-    script(src='/bower_components/c3/c3.min.js' type='text/javascript')
-
     <!-- jQuery -->
     script(src="/bower_components/jquery/dist/jquery.min.js" type="text/javascript")
     
@@ -219,16 +205,10 @@ block scripts
     <!-- Bootstrap Core JavaScript -->
     script(src="/bower_components/bootstrap/dist/js/bootstrap.min.js" type="text/javascript")
 
-    <!-- Metis Menu Plugin JavaScript -->
-    script(src="/bower_components/metisMenu/dist/metisMenu.min.js" type="text/javascript")
-
     <!-- DataTables JavaScript -->
     script(src="/bower_components/datatables/media/js/jquery.dataTables.min.js" type="text/javascript")
     script(src="/bower_components/datatables-plugins/integration/bootstrap/3/dataTables.bootstrap.min.js" type="text/javascript")
 
-    <!-- Custom Theme JavaScript -->
-    script(src="/bower_components/sb-admin-2/js/sb-admin-2.js" type="text/javascript")
-        
     script(type="text/javascript").
         $(document).ready(function() {
             $('#datatable-accounts').DataTable({
@@ -244,7 +224,7 @@ block scripts
                 "iDisplayLength": 10,
                 "ajax": "/accounts/fetch",
                 "columns": [
-                    {"data": "name"},
+                    {"data": "account_name"},
                     {"data": "status"},
                     {"data": "type"},
                 ],
@@ -287,7 +267,10 @@ block scripts
                 ignore: ":hidden",
                 onsubmit: false,
                 rules: {
-                    name: {
+                    account_name: {
+                        required: true
+                    },
+                    mint_account_name: {
                         required: true
                     },
                     statusOptions: {
@@ -308,7 +291,8 @@ block scripts
             $("#submit1").on('click', function() {
                 if ($("#addAccountForm").valid()) {
                     var postData = {
-                        "name": $("#name").val(),
+                        "account_name": $("#account_name").val(),
+                        "mint_account_name": $("#mint_account_name").val(),
                         "status": $("#statusOptions").text().trim(),
                         "type": $("#typeOptions").text().trim(), 
                         "yield": $("#yield").val(),                                            
@@ -339,7 +323,7 @@ block scripts
                             setTimeout(function() {$('#datatable-accounts').DataTable().ajax.reload();}, 1000);
                         },
                         error: function(jqXHR, textStatus, errorThrown) {
-                            $('#mess').html('<p>status code: '+jqXHR.status+'</p><p>errorThrown: ' + errorThrown + '</p><p>jqXHR.responseText:</p><div>'+jqXHR.responseText + '</div>');
+                            $('#message').html('<p>status code: '+jqXHR.status+'</p><p>errorThrown: ' + errorThrown + '</p><p>jqXHR.responseText:</p><div>'+jqXHR.responseText + '</div>');
                         }
                     });
                 }

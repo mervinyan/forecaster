@@ -53,7 +53,8 @@ router.get('/fetch', function (req, res, next) {
 router.post('/add', function (req, res, next) {
     process(req, res,
         function (req) {
-            req.checkBody('name', 'Name is required').notEmpty();
+            req.checkBody('account_name', 'Account Name is required').notEmpty();
+            req.checkBody('mint_account_name', 'Mint Account Name is required').notEmpty();
             req.checkBody('status', 'Status is required').notEmpty();
             req.checkBody('type', 'Type is required').notEmpty();
 
@@ -62,7 +63,7 @@ router.post('/add', function (req, res, next) {
 
         },
         function (req) {
-            return "account-" + req.body.name.toLowerCase().replace(/ /g, "_");
+            return "account-" + req.body.account_name.toLowerCase().replace(/ /g, "_");
         },
         function (req) {
 
@@ -72,7 +73,8 @@ router.post('/add', function (req, res, next) {
                     'EventId': uuid.v4(),
                     'Type': 'AccountCreated',
                     'Data': new Buffer(JSON.stringify({
-                        'name': req.body.name,
+                        'account_name': req.body.account_name,
+                        'mint_account_name': req.body.mint_account_name,                        
                         'status': req.body.status,
                         'type': req.body.type,
                         'yield': req.body.yield,
