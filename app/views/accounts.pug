@@ -47,13 +47,9 @@ block content
                     div#messages
                     div.modal-body
                         div.form-group
-                            label.col-md-4.control-label(for='account_name') Name
+                            label.col-md-4.control-label(for='name') Name
                             div.col-md-8
-                                input#account_name.form-control(type='text', name='account_name')
-                        div.form-group
-                            label.col-md-4.control-label(for='name') Mint Account Name
-                            div.col-md-8
-                                input#mint_account_name.form-control(type='text', name='mint_account_name')
+                                input#name.form-control(type='text', name='name')
                         div.form-group
                             label.col-md-4.control-label(for='statusOptions') Status
                             div.col-md-8.dropdown
@@ -224,7 +220,7 @@ block scripts
                 "iDisplayLength": 10,
                 "ajax": "/accounts/fetch",
                 "columns": [
-                    {"data": "account_name"},
+                    {"data": "name"},
                     {"data": "status"},
                     {"data": "type"},
                 ],
@@ -267,10 +263,7 @@ block scripts
                 ignore: ":hidden",
                 onsubmit: false,
                 rules: {
-                    account_name: {
-                        required: true
-                    },
-                    mint_account_name: {
+                    name: {
                         required: true
                     },
                     statusOptions: {
@@ -291,8 +284,7 @@ block scripts
             $("#submit1").on('click', function() {
                 if ($("#addAccountForm").valid()) {
                     var postData = {
-                        "account_name": $("#account_name").val(),
-                        "mint_account_name": $("#mint_account_name").val(),
+                        "name": $("#name").val(),
                         "status": $("#statusOptions").text().trim(),
                         "type": $("#typeOptions").text().trim(), 
                         "yield": $("#yield").val(),                                            
