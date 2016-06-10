@@ -12,7 +12,22 @@ var utils = require('./utils.js');
 var uuid = require('node-uuid');
 
 router.get('/', function (req, res, next) {
-    res.render('actuals.pug', { title: 'Actuals' });
+    utils.fetch_projection_result('projection_account_info',
+        function (data) {
+            var accounts = [];
+            for (var account in data.accounts) {
+                if (data.accounts[account].status == "Active") {
+                    accounts.push(account);
+                }
+            }
+            res.render('actuals.pug', { title: 'Actuals', 'accounts': accounts });
+        },
+        function () {
+            res.render('actuals.pug', { title: 'Actuals', 'accounts': [] });
+        },
+        function () {
+            res.render('actuals.pug', { title: 'Actuals', 'accounts': [] });
+        });
 });
 
 
@@ -43,33 +58,31 @@ router.get('/fetch', function (req, res, next) {
 
 router.post('/import', function (req, res, next) {
     console.log(req.files);
-    var account_name_lookup = {};
-    utils.fetch_projection_result('projection_account_name_lookup',
-        function (data) {
+    // console.log(req.fields);
+    var accountName = 'american_express_31013';
+    // var account_name_lookup = {};
+    // utils.fetch_projection_result('projection_account_name_lookup',
+    //     function (data) {
 
-            for (var account in data.accounts) {
-                if (!account_name_lookup[account]) {
-                    account_name_lookup[account] = data.accounts[account];
-                }
-            }
-        },
-        function () {
-            res.json({ 'data': [] });
-        },
-        function () {
-            res.json({ 'data': [] });
-        });
+    //         for (var account in data.accounts) {
+    //             if (!account_name_lookup[account]) {
+    //                 account_name_lookup[account] = data.accounts[account];
+    //             }
+    //         }
+    //     },
+    //     function () {
+    //         res.json({ 'data': [] });
+    //     },
+    //     function () {
+    //         res.json({ 'data': [] });
+    //     });
 
 
     var stream = fs.createReadStream("./uploads/actuals.csv");
-    var events = {};
+    var events = [];
     csv.fromStream(stream, { headers: true })
         .on("data", function (data) {
-            var accountName = data["Account Name"];
-            if (!events[accountName]) {
-                events[accountName] = [];
-            }
-            events[accountName].unshift({
+            events.unshift({
                 EventId: uuid.v4(),
                 Type: 'ActualImported',
                 Data: new Buffer(JSON.stringify(data)),
@@ -78,25 +91,18 @@ router.post('/import', function (req, res, next) {
         })
         .on("end", function () {
             console.log("done");
-            for (var accountName in events) {
-                utils.process(req, res,
-                    function (req) {
-                        var errors = req.validationErrors();
-                        return errors;
-                    },
-                    function (req) {
-                        if (account_name_lookup[accountName]) {
-                            return "account-" + account_name_lookup[accountName].toLowerCase().replace(/ /g, "_");
-                        } else {
-                            return "account-" + accountName.toLowerCase().replace(/ /g, "_");
-
-                        }
-                    },
-                    function (req) {
-                        return events[accountName];
-                    }
-                );
-            }
+            utils.process(req, res,
+                function (req) {
+                    var errors = req.validationErrors();
+                    return errors;
+                },
+                function (req) {
+                    return "account-" + accountName.toLowerCase().replace(/ /g, "_");
+                },
+                function (req) {
+                    return events;
+                }
+            );
         });
 });
 
