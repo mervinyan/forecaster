@@ -3,7 +3,7 @@ fromCategory('account')
     .when({
         "ActualImported": function(state, ev) {
             var date =ev.body["Date"];
-            var year = date.substring(date.lastIndexOf("/")+1, date.length);
+            var year = date.substring(0, 4);
             linkTo('actual_transactions-'+year, ev);
         }
     }

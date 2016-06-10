@@ -11,12 +11,18 @@ html(lang="en")
     <!-- Bootstrap Core CSS -->
     link(href="/bower_components/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet" type="text/css")
 
+    <!-- MetisMenu CSS -->
+    link(href="/bower_components/metisMenu/dist/metisMenu.min.css" rel="stylesheet" type="text/css")
+
+    <!-- Custom CSS -->
+    link(href="/bower_components/sb-admin-2/css/sb-admin-2.css" rel="stylesheet" type="text/css")
+
     <!-- Custom Fonts -->
     link(href="/bower_components/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css")
         
   body
-    nav.navbar.navbar-inverse.navbar-fixed-top(role="navigation" style="margin-bottom:0")
-      div.container-fluid
+    div#wrapper
+      nav.navbar.navbar-default.navbar-static-top(role="navigation" style="margin-bottom:0")
         div.navbar-header
           button.navbar-toggle(type="button" data-toggle="collapse" data-target=".navbar-collapse")
             span.sr-only 
@@ -25,21 +31,202 @@ html(lang="en")
             span.icon-bar
             span.icon-bar
           a.navbar-brand(href="/") 
-            | Cash Flow Forecaster
-        div.collapse.navbar-collapse
-          ul.nav.navbar-nav
-            li
-              a(href="/") Dashboard
-            li
-              a(href="/accounts") Accounts
-            li
-              a(href="/forecasts") Forecast            
-            li
-              a(href="/actuals") Actuals            
-  div.container-fluid
-    block content
+            | Forecaster
+        ul.nav.navbar-top-links.navbar-right
+          li.dropdown
+            a.dropdown-toggle(href="#", data-toggle="dropdown")
+              i.fa.fa-envelope.fa-fw 
+              i.fa.fa-caret-down
+            ul.dropdown-menu.dropdown-messages
+              li
+                a(href="#")
+                  div
+                    strong Mervin Yan
+                    span.pull-right.text-muted
+                      em
+                        | Yesterday
+                  div
+                    | Much of the essence of building a program is in fact the debugging of the specification. — Fred Brooks
+              li.divider  
+              li
+                a(href="#")
+                  div
+                    strong Mervin Yan
+                    span.pull-right.text-muted
+                      em
+                        | Yesterday
+                  div
+                    | One computer is a problem. A computer network is a large problem. The internet is the world’s largest problem. - Douglas Warren 
+              li.divider
+              li
+                a.text-center(href="#")
+                  strong Read All Messages
+                  |  
+                  i.fa.fa-angle-right    
+          li.dropdown
+            a.dropdown-toggle(href="#", data-toggle="dropdown")
+              i.fa.fa-tasks.fa-fw 
+              i.fa.fa-caret-down 
+            ul.dropdown-menu.dropdown-tasks
+              li
+                a(href="#")
+                  div
+                    p
+                      strong Task 1  
+                      span.pull-right.text-muted
+                        | 40% Complete
+                    div.progress.progress-stripped.active
+                      div.progress-bar.progress-bar-success(role="progressbar" aria-valuenow="40" aria-valuemin="0" aria-valuemax="100" style="width: 40%")
+                        span.sr-only
+                          | 40% Complete (success)
+              li.divider
+              li
+                a(href="#")
+                  div
+                    p
+                      strong Task 2  
+                      span.pull-right.text-muted
+                        | 20% Complete
+                    div.progress.progress-stripped.active
+                      div.progress-bar.progress-bar-info(role="progressbar" aria-valuenow="20" aria-valuemin="0" aria-valuemax="100" style="width: 20%")
+                        span.sr-only
+                          | 20% Complete 
+              li.divider
+              li
+                a(href="#")
+                  div
+                    p
+                      strong Task 3  
+                      span.pull-right.text-muted
+                        | 60% Complete
+                    div.progress.progress-stripped.active
+                      div.progress-bar.progress-bar-warning(role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: 60%")
+                        span.sr-only
+                          | 60% Complete (Warning)
+              li.divider
+              li
+                a(href="#")
+                  div
+                    p
+                      strong Task 4  
+                      span.pull-right.text-muted
+                        | 80% Complete
+                    div.progress.progress-stripped.active
+                      div.progress-bar.progress-bar-danger(role="progressbar" aria-valuenow="80" aria-valuemin="0" aria-valuemax="100" style="width: 80%")
+                        span.sr-only
+                          | 80% Complete (danger)
+              li.divider
+              li
+                a.text-center(href="#")
+                  strong See All Tasks
+                  | 
+                  i.fa.fa-angle-right  
+          li.dropdown
+            a.dropdown-toggle(href="#", data-toggle="dropdown")
+              i.fa.fa-bell.fa-fw 
+              i.fa.fa-caret-down 
+            ul.dropdown-menu.dropdown-alerts
+              li
+                a(href="#")
+                  div
+                    i.fa.fa-comment.fa-fw
+                      | New Comment
+                    span.pull-right.text-muted.small
+                      | 4 minutes ago  
+              li.divider
+              li  
+                a(href="#")
+                  div
+                    i.fa.fa-twitter.fa-fw
+                      | 3 New Followers
+                    span.pull-right.text-muted.small
+                      | 12 minutes ago  
+              li.divider
+              li  
+                a(href="#")
+                  div
+                    i.fa.fa-envelope.fa-fw
+                      | Message Sent
+                    span.pull-right.text-muted.small
+                      | 4 minutes ago  
+              li.divider
+              li  
+                a(href="#")
+                  div
+                    i.fa.fa-tasks.fa-fw
+                      | New Task
+                    span.pull-right.text-muted.small
+                      | 4 minutes ago  
+              li.divider
+              li  
+                a(href="#")
+                  div
+                    i.fa.fa-upload.fa-fw
+                      | Server Rebooted
+                    span.pull-right.text-muted.small
+                      | 4 minutes ago  
+              li.divider
+              li
+                a.text-center(href="#")
+                  strong See All Alerts
+                  | 
+                  i.fa.fa-angle-right  
+          li.dropdown
+            a.dropdown-toggle(href="#", data-toggle="dropdown")
+              i.fa.fa-user.fa-fw 
+              i.fa.fa-caret-down 
+            ul.dropdown-menu.dropdown-user
+              li
+                a(href="#")
+                  i.fa.fa-fw.fa-user 
+                    | User Profile  
+              li
+                a(href="#")
+                  i.fa.fa-fw.fa-gear 
+                    | Settings  
+              li.divider  
+              li
+                a(href="#")
+                  i.fa.fa-fw.fa-sign-out 
+                    | Logout      
+        div.navbar-default.sidebar(role="navigation") 
+          div.sidebar-nav.navbar-collapse
+            ul#side-menu.nav                                   
+              li
+                a(href="/" ) 
+                  i.fa.fa-fw 
+                  | Cash Flow
+              li
+                a(href="/accounts" ) 
+                  i.fa.fa-fw
+                  | Accounts
+
+              li
+                a(href="/forecasts")
+                  i.fa.fa-fw
+                  | Forecasts
+              li
+                a(href="/actuals") 
+                  i.fa.fa-fw
+                  | Actuals                
+                        
+      div#page-wrapper
+        block content
 
   block scripts
+    <!-- jQuery -->
+    script(src="/bower_components/jquery/dist/jquery.min.js" type="text/javascript")
+    
     <!-- Bootstrap Core JavaScript -->
     script(src="/bower_components/bootstrap/dist/js/bootstrap.min.js" type="text/javascript")
+
+    <!-- Metis Menu Plugin JavaScript -->
+    script(src="/bower_components/metisMenu/dist/metisMenu.min.js" type="text/javascript")
+
+    <!-- DataTables JavaScript -->
+    script(src="/bower_components/datatables/media/js/jquery.dataTables.min.js" type="text/javascript")
+    script(src="/bower_components/datatables-plugins/integration/bootstrap/3/dataTables.bootstrap.min.js" type="text/javascript")
+
+    <!-- Custom Theme JavaScript -->
+    script(src="/bower_components/sb-admin-2/js/sb-admin-2.js" type="text/javascript")
     

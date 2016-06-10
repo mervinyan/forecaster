@@ -11,7 +11,21 @@ var utils = require('./utils.js');
 var uuid = require('node-uuid');
 
 router.get('/', function (req, res, next) {
-    res.render('accounts.pug', { title: 'Accounts' });
+    utils.fetch_projection_result('projection_account_info', 
+        function (data) {
+            var accounts = [];
+            for (var account in data.accounts) {
+                accounts.push(data.accounts[account]);
+            }
+            res.render('accounts.pug', { title: 'Accounts','data': accounts });
+        },
+        function () {
+            res.render('accounts.pug', { title: 'Accounts', 'data': [] });
+        },
+        function () {
+            res.render('accounts.pug', { title: 'Accounts', 'data': [] });
+        });
+    
 });
 
 router.get('/fetch', function (req, res, next) {

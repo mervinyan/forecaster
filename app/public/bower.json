@@ -25,6 +25,7 @@
     "c3": "^0.4.10",
     "d3": "^3.5.16",
     "jquery-validation": "^1.15.0",
-    "jsoneditor": "^5.5.5"
+    "jsoneditor": "^5.5.5",
+    "jquery-form": "^3.46.0"
   }
 }

@@ -7,7 +7,6 @@ var csv = require('fast-csv');
 
 var numeral = require('numeral');
 
-
 var utils = require('./utils.js');
 var uuid = require('node-uuid');
 
@@ -36,21 +35,21 @@ router.get('/fetch', function (req, res, next) {
         var actual_transactions = [];
         for (var i = 0; i < readResult.Events.length; i++) {
             var event = readResult.Events[i].Event;
-            var eventDataStr = bin2String(event.Data.toJSON().data)
+            var eventDataStr = utils.bin2String(event.Data.toJSON().data)
             var eventData = JSON.parse(eventDataStr);
-            var amount = numeral(eventData["Amount"]).format('$0,0.00');
+            var amount = numeral(eventData["amount"]).format('$0,0.00');
             var transaction = {
-                "date": eventData["Date"],
-                "account": eventData["Account Name"],
+                "date": eventData["date"],
+                "account": eventData["account"],
                 "amount": amount,
-                "transaction_type": eventData["Transaction Type"],
-                "description": eventData["Description"],
-                "original_description": eventData["Original Description"],
-                "category": eventData["Category"],
-                "labels": eventData["Labels"],
-                "notes": eventData["Notes"]
+                "transaction_type": eventData["transaction_type"],
+                "description": eventData["description"],
+                "original_description": eventData["original_description"],
+                "category": eventData["category"],
+                "labels": eventData["labels"],
+                "notes": eventData["notes"]
             };
-            actual_transactions.unshift(transaction);
+            actual_transactions.push(transaction);
         }
         res.json({ "data": actual_transactions });
     });
@@ -58,34 +57,27 @@ router.get('/fetch', function (req, res, next) {
 
 router.post('/import', function (req, res, next) {
     console.log(req.files);
-    // console.log(req.fields);
-    var accountName = 'american_express_31013';
-    // var account_name_lookup = {};
-    // utils.fetch_projection_result('projection_account_name_lookup',
-    //     function (data) {
-
-    //         for (var account in data.accounts) {
-    //             if (!account_name_lookup[account]) {
-    //                 account_name_lookup[account] = data.accounts[account];
-    //             }
-    //         }
-    //     },
-    //     function () {
-    //         res.json({ 'data': [] });
-    //     },
-    //     function () {
-    //         res.json({ 'data': [] });
-    //     });
-
+    var accountName = req.body.account_name;
 
     var stream = fs.createReadStream("./uploads/actuals.csv");
     var events = [];
     csv.fromStream(stream, { headers: true })
         .on("data", function (data) {
+            var eventData = {
+                "date": moment(data["Date"]).format('YYYY-MM-DD'),
+                "account": accountName,
+                "amount": data["Amount"],
+                "transaction_type": data["Transaction Type"],
+                "description": data["Description"],
+                "original_description": data["Original Description"],
+                "category": data["Category"],
+                "labels": data["Labels"],
+                "notes": data["Notes"]
+            };
             events.unshift({
                 EventId: uuid.v4(),
                 Type: 'ActualImported',
-                Data: new Buffer(JSON.stringify(data)),
+                Data: new Buffer(JSON.stringify(eventData)),
                 IsJson: true
             });
         })

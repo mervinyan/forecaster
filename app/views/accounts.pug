@@ -3,7 +3,13 @@ extends layout
 block links
     
     link(href="/stylesheets/style.css" rel="stylesheet" type="text/css")
+
+
+    <!-- C3 Chart CSS -->
+    link(href='/bower_components/c3/c3.css' rel='stylesheet' type='text/css')
     
+    link(href="/stylesheets/style.css" rel="stylesheet" type="text/css")
+
     <!-- Bootstrap Core CSS -->
     link(href="/bower_components/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet" type="text/css")
 
@@ -12,7 +18,10 @@ block links
 
     <!-- DataTables Responsive CSS -->
     link(href="/bower_components/datatables-responsive/css/responsive.dataTables.scss" rel="stylesheet")
-    
+
+    <!-- Custom CSS -->
+    link(href="/bower_components/sb-admin-2/css/sb-admin-2.css" rel="stylesheet" type="text/css")
+
     <!-- Custom Fonts -->
     link(href="/bower_components/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css")
 
@@ -20,7 +29,6 @@ block content
     div.row
         div.col-md-12
             h1.page-header #{title}
-
     div.row
         div.col-md-12
             button#addAccount.btn.btn-primary(data-toggle="modal" data-target="#addAccountModal") Add Account
@@ -191,6 +199,12 @@ block content
                         button#submit1.btn.btn-primary(type="button") Save      
 
 block scripts
+    <!-- D3 Chart JavaScript -->
+    script(src='/bower_components/d3/d3.min.js' charset='utf-8' type='text/javascript')
+
+    <!-- C3 Chart JavaScript -->
+    script(src='/bower_components/c3/c3.min.js' type='text/javascript')
+
     <!-- jQuery -->
     script(src="/bower_components/jquery/dist/jquery.min.js" type="text/javascript")
     
@@ -204,6 +218,9 @@ block scripts
     <!-- DataTables JavaScript -->
     script(src="/bower_components/datatables/media/js/jquery.dataTables.min.js" type="text/javascript")
     script(src="/bower_components/datatables-plugins/integration/bootstrap/3/dataTables.bootstrap.min.js" type="text/javascript")
+
+    <!-- Custom Theme JavaScript -->
+    script(src="/bower_components/sb-admin-2/js/sb-admin-2.js" type="text/javascript")
 
     script(type="text/javascript").
         $(document).ready(function() {
@@ -321,5 +338,7 @@ block scripts
                 }
             });
         });
+
+
 
 

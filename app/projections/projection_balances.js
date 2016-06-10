@@ -6,14 +6,14 @@ fromCategory('account')
             }
         },
         "ActualImported": function (state, ev) {
-            if (!state.balances[ev.body["Account Name"]]) {
-                state.balances[ev.body["Account Name"]] = 0.00;
+            if (!state.balances[ev.body["account"]]) {
+                state.balances[ev.body["account"]] = 0.00;
             }
-            if (ev.body["Transaction Type"] == "credit") {
-                state.balances[ev.body["Account Name"]] += parseFloat(ev.body.Amount);
+            if (ev.body["transaction_type"] == "credit") {
+                state.balances[ev.body["account"]] += parseFloat(ev.body["amount"]);
             }
-            if (ev.body["Transaction Type"] == "debit") {
-                state.balances[ev.body["Account Name"]] -= parseFloat(ev.body.Amount);
+            if (ev.body["transaction_type"] == "debit") {
+                state.balances[ev.body["account"]] -= parseFloat(ev.body["amount"]);
             }
         }
     });

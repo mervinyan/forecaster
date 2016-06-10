@@ -1,4 +1,4 @@
-$projections = 'projection_account_info',  'projection_cashflow'
+$projections = 'projection_account_info'
 Foreach ($projection in $projections)
 {
 	$fileName = '@C:\my_workspaces\forecaster\app\projections\' + $projection + '.js'
