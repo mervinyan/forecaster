@@ -10,6 +10,7 @@ var validator = require('express-validator');
 
 var dashboard = require('./routes/dashboard');
 var financial_accounts = require('./routes/financial_accounts');
+var budgets = require('./routes/budgets');
 var cashflow = require('./routes/cashflow');
 var accounts = require('./routes/accounts');
 var forecasts = require('./routes/forecasts');
@@ -43,6 +44,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use('/', dashboard);
 app.use('/dashboard', dashboard);
 app.use('/financial_accounts', financial_accounts);
+app.use('/budgets', budgets);
 app.use('/cashflows', cashflow);
 app.use('/accounts', accounts);
 app.use('/forecasts', forecasts);

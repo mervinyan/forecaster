@@ -27,7 +27,7 @@ block content
                     | Account Summary
     div.row
         div.col-md-3
-            
+
         div.col-md-9
             div.panel.panel-default
                 div.panel-heading
@@ -70,38 +70,85 @@ block content
                             div.panel.panel-default
                                 div.panel-heading
                                     div.row
-                                        div.col-xs-6
+                                        div.col-xs-8
                                             div
                                                 a
-                                                    strong SimplyCash(TM) Card from American Express
+                                                    h3.panel-title SimplyCash(TM) Card from American Express
                                             div
                                                 small Credit Card
-                                        div.col-xs-6.text-right
+                                        div.col-xs-4.text-right
                                             div
                                                 strong $0.00
                                             div
                                                 small June 12, 2016
-                                div.panel-body 
-
+                                div.panel-body
+                                    div#manage_account.collapse
+                                        div.row
+                                            div.col-xs-4
+                                                div
+                                                    | Settings
+                                                div
+                                                    label
+                                                        | 
+                                                div
+                                                    a(href="/account/201260/edit")
+                                                        | Account Preferences
+                                                div
+                                                    a(href="/account/201260/balance_settings")
+                                                        | Balances
+                                                div
+                                                    a(href="/account/201260/interest_settings")
+                                                        | Interest
+                                                div
+                                                    a(href="/account/201260/other_settings")
+                                                        | Other 
+                                            div.col-xs-4
+                                                div
+                                                    | Transactions
+                                                div
+                                                    label
+                                                        |                                                    
+                                                div
+                                                    a(href="/transactions/201260/filter")
+                                                        | View Transactions                                                     
+                                                div
+                                                    a(href="/account/201260/import_transactions")
+                                                        | Upload Transactions
+                                                div
+                                                    a(href="/account/201260/manual_transactions")
+                                                        | Manual Input
+                                            div.col-xs-4   
+                                                div
+                                                    | Group & Delete
+                                                div
+                                                    label
+                                                        |                                                 
+                                                div
+                                                    a(href="/account/201260/group")
+                                                        | Group Account                                                     
+                                                div
+                                                    a(href="/account/201260/delete")
+                                                        | Delete Account                                                        
+                                                   
                                 div.panel-footer
                                     div.row
-                                        div.col-xs-6
+                                        div.col-xs-8
                                             a(href="/transactions") 
                                                 | 30 Uncategoried
-                                        div.col-xs-6.text-right
-                                            a() 
+                                        div.col-xs-4.text-right
+                                            a.btn.btn-primary(role="button" data-toggle="collapse" href="#manage_account" aria-expanded="false" aria-controls="manage_account") 
                                                 | Manage Account
                         div.col-md-6
                             div.panel.panel-default
                                 div.panel-heading
                                     div.row
-                                        div.col-xs-6
+                                        div.col-xs-8
                                             div
                                                 a
-                                                    strong Smart Cash World MasterCard
+                                                    h3.panel-title Smart Cash World MasterCard
                                             div
                                                 small Credit Card
-                                        div.col-xs-6.text-right
+                                        div.col-xs-4.text-right
                                             div
                                                 strong $0.00
                                             div
@@ -110,10 +157,10 @@ block content
 
                                 div.panel-footer
                                     div.row
-                                        div.col-xs-6
+                                        div.col-xs-8
                                             a(href="/transactions") 
                                                 | 30 Uncategoried
-                                        div.col-xs-6.text-right
+                                        div.col-xs-4.text-right
                                             a() 
                                                 | Manage Account
             
@@ -122,13 +169,13 @@ block content
                             div.panel.panel-default
                                 div.panel-heading
                                     div.row
-                                        div.col-xs-6
+                                        div.col-xs-8
                                             div
                                                 a
-                                                    strong RBC Chequing
+                                                    h3.panel-title RBC Chequing
                                             div
                                                 small Checking
-                                        div.col-xs-6.text-right
+                                        div.col-xs-4.text-right
                                             div
                                                 strong $0.00
                                             div
@@ -137,23 +184,23 @@ block content
 
                                 div.panel-footer
                                     div.row
-                                        div.col-xs-6
+                                        div.col-xs-8
                                             a(href="/transactions") 
                                                 | 30 Uncategoried
-                                        div.col-xs-6.text-right
+                                        div.col-xs-4.text-right
                                             a() 
                                                 | Manage Account
                         div.col-md-6
                             div.panel.panel-default
                                 div.panel-heading
                                     div.row
-                                        div.col-xs-6
+                                        div.col-xs-8
                                             div
                                                 a
-                                                    strong RBC Savings
+                                                    h3.panel-title RBC Savings
                                             div
                                                 small Savings
-                                        div.col-xs-6.text-right
+                                        div.col-xs-4.text-right
                                             div
                                                 strong $0.00
                                             div
@@ -162,10 +209,10 @@ block content
 
                                 div.panel-footer
                                     div.row
-                                        div.col-xs-6
+                                        div.col-xs-8
                                             a(href="/transactions") 
                                                 | 30 Uncategoried
-                                        div.col-xs-6.text-right
+                                        div.col-xs-4.text-right
                                             a() 
                                                 | Manage Account                   
 

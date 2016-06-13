@@ -1,0 +1,61 @@
+extends layout
+
+block links
+    
+    link(href="/stylesheets/style.css" rel="stylesheet" type="text/css")
+
+    <!-- C3 Chart CSS -->
+    link(href='/bower_components/c3/c3.css' rel='stylesheet' type='text/css')
+
+    <!-- Bootstrap Core CSS -->
+    link(href="/bower_components/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet" type="text/css")
+
+    <!-- DataTables CSS -->
+    link(href="/bower_components/datatables-plugins/integration/bootstrap/3/dataTables.bootstrap.css" rel="stylesheet" type="text/css")
+
+    <!-- DataTables Responsive CSS -->
+    link(href="/bower_components/datatables-responsive/css/responsive.dataTables.scss" rel="stylesheet")
+
+    <!-- Custom Fonts -->
+    link(href="/bower_components/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css")
+
+block content
+    div.row
+        div.col-md-12
+            ol.breadcrumb
+                li
+                    | Budgets
+    div.row
+        div.col-md-12
+            div.panel.panel-default
+                div.panel-heading
+                    div.btn-toolbar(role="toolbar")
+                        div.btn-group(role="group")                    
+                            a.btn.btn-default(href="#" role="button") 
+                                i.fa.fa-plus
+                                | 
+                                | Add Budget
+                            | 
+                            input(type="checkbox") 
+                            | 
+                            | Show Ignored Budgets
+                div.panel-body 
+            
+                                    
+
+block scripts
+    <!-- D3 Chart JavaScript -->
+    script(src='/bower_components/d3/d3.min.js' charset='utf-8' type='text/javascript')
+
+    <!-- C3 Chart JavaScript -->
+    script(src='/bower_components/c3/c3.min.js' type='text/javascript')
+
+    <!-- jQuery -->
+    script(src="/bower_components/jquery/dist/jquery.min.js" type="text/javascript")
+    
+    <!-- Bootstrap Core JavaScript -->
+    script(src="/bower_components/bootstrap/dist/js/bootstrap.min.js" type="text/javascript")
+
+    <!-- DataTables JavaScript -->
+    script(src="/bower_components/datatables/media/js/jquery.dataTables.min.js" type="text/javascript")
+    script(src="/bower_components/datatables-plugins/integration/bootstrap/3/dataTables.bootstrap.min.js" type="text/javascript")
