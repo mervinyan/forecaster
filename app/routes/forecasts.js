@@ -42,9 +42,15 @@ router.get('/fetch', function (req, res, next) {
             }
         }
 
-        // forecasted_transactions.sort(function(a, b) {
-            
-        // });
+        forecasted_transactions.sort(function(a, b) {
+            if (moment(b.date).isAfter(moment(a.date))) {
+                return 1;
+            } else if (moment(b.date).isSame(moment(a.date))) {
+                return 0;
+            } else {
+                return -1;
+            }
+        });
 
         res.json({ "data": forecasted_transactions });
     });
@@ -62,7 +68,7 @@ router.post('/add', function (req, res, next) {
                 req.checkBody('income_type', 'Income Type is required').notEmpty();
             } else if (req.body.type == 'expense') {
                 req.checkBody('to', 'To is required').notEmpty();
-                req.checkBody('for', 'For is required').notEmpty();
+                // req.checkBody('for', 'For is required').notEmpty();
                 req.checkBody('category', 'Category is required').notEmpty();
             }
             if (req.body.recurring == 'yes') {

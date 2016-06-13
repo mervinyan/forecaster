@@ -28,6 +28,9 @@ router.get('/', function (req, res, next) {
                 cashflow.push({ "month": month, "accounts": cashflow_accounts });
 
             }
+            cashflow.sort(function(a, b) {
+                return b.month.localeCompare(a.month);
+            });
 
             res.render('cashflow.pug', { title: 'Cashflow Forecast', 'cashflow': cashflow });
 

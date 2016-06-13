@@ -45,7 +45,7 @@ module.exports = {
             console.log('connecting to geteventstore...');
             connection.readStreamEventsBackward(stream, { start: start, count: count, resolveLinkTos: resolveLinkTos }, function (err, readResult) {
                 if (err) return console.log('Ooops!', err);
-                console.log(readResult);
+                // console.log(readResult);
                 resultProcessor(readResult);
             });
         });
@@ -58,7 +58,7 @@ module.exports = {
         } else {
             var stream = streamIdGenerator(req);
             var events = eventDataExtractor(req);
-            console.log(events);
+            // console.log(events);
             var connection = ges({ host: '127.0.0.1' });
             connection.on('connect', function () {
                 console.log('connecting to geteventstore...');
@@ -69,7 +69,7 @@ module.exports = {
                         expectedVersion: expectedVersion,
                         events: events
                     };
-                    console.log(appendData);
+                    // console.log(appendData);
                     connection.appendToStream(stream, appendData, function (err, appendResult) {
                         if (err) return console.log('Oops!', err);
                         res.json(appendResult);
