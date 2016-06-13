@@ -8,7 +8,7 @@ block links
     link(href='/bower_components/c3/c3.css' rel='stylesheet' type='text/css')
 
     <!-- Bootstrap Core CSS -->
-    link(href="/bower_components/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet" type="text/css")
+    link(href="/bower_components/bootstrap/dist/css/bootstrap.css" rel="stylesheet" type="text/css")
 
     <!-- DataTables CSS -->
     link(href="/bower_components/datatables-plugins/integration/bootstrap/3/dataTables.bootstrap.css" rel="stylesheet" type="text/css")
@@ -19,66 +19,73 @@ block links
     <!-- Custom Fonts -->
     link(href="/bower_components/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css")
 
+    -var selected = 'home';
+
 block content
     div.row
         div.col-md-12
-            ol.breadcrumb
-                li
-                    | Dashboard
-    div.row
-        div.col-md-12
             div.panel.panel-default
                 div.panel-heading
-                    a(href="/networth") Net Worth and Forecast
-                div.panel-body
+                    div.row
+                        div.col-md-12
+                            h3.panel-title
+                                strong Dashboard
+                            br 
+                div.panel-body   
+                    div.row
+                        div.col-md-12
+                            div.panel.panel-default
+                                div.panel-heading
+                                    a(href="/networth") Net Worth and Forecast
+                                div.panel-body
 
-    div.row
-        div.col-md-3
-            div.panel.panel-default
-                div.panel-heading
                     div.row
-                        div.col-xs-6
-                            a(href="/accounts") Accounts
-                        div.col-xs-6.text-right
-                            | 10
-                div.panel-body                   
-        div.col-md-3
-            div.panel.panel-default
-                div.panel-heading
-                    div.row
-                        div.col-xs-6
-                            a(href="/transactions") Recent Activity
-                        div.col-xs-6.text-right
-                            | Since June 01, 2016
-                div.panel-body                 
-        div.col-md-6
-            div.panel.panel-default
-                div.panel-heading
-                    div.row
-                        div.col-xs-6
-                            a(href="/cashflows") Earninng and Spending
-                        div.col-xs-6.text-right
-                            i.fa.fa-calendar
-                            | 
-                            | June 01'16 - June 09'16
-                div.panel-body                                 
+                        div.col-md-3
+                            div.panel.panel-default
+                                div.panel-heading
+                                    div.row
+                                        div.col-xs-6
+                                            a(href="/accounts") Accounts
+                                        div.col-xs-6.text-right
+                                            | 10
+                                div.panel-body                   
+                        div.col-md-3
+                            div.panel.panel-default
+                                div.panel-heading
+                                    div.row
+                                        div.col-xs-6
+                                            a(href="/transactions") Recent Activity
+                                        div.col-xs-6.text-right
+                                            | Since June 01, 2016
+                                div.panel-body                 
+                        div.col-md-6
+                            div.panel.panel-default
+                                div.panel-heading
+                                    div.row
+                                        div.col-xs-6
+                                            a(href="/cashflows") Earninng and Spending
+                                        div.col-xs-6.text-right
+                                            i.fa.fa-calendar
+                                            | 
+                                            | June 01'16 - June 09'16
+                                div.panel-body                                 
 
-    div.row
-        div.col-md-6
-            div.panel.panel-default
-                div.panel-heading
-                    a(href="/budgets") Active Budgets
-                div.panel-body                   
-        div.col-md-3
-            div.panel.panel-default
-                div.panel-heading
-                    a(href="/calendar") Next 7 days
-                div.panel-body                 
-        div.col-md-3
-            div.panel.panel-default
-                div.panel-heading
-                    a(href="/alerts") Alerts
-                div.panel-body                    
+                    div.row
+                        div.col-md-6
+                            div.panel.panel-default
+                                div.panel-heading
+                                    a(href="/budgets") Active Budgets
+                                div.panel-body                   
+                        div.col-md-3
+                            div.panel.panel-default
+                                div.panel-heading
+                                    a(href="/calendar") Next 7 days
+                                div.panel-body                 
+                        div.col-md-3
+                            div.panel.panel-default
+                                div.panel-heading
+                                    a(href="/alerts") Alerts
+                                div.panel-body                    
 
 block scripts
     <!-- D3 Chart JavaScript -->
@@ -96,3 +103,11 @@ block scripts
     <!-- DataTables JavaScript -->
     script(src="/bower_components/datatables/media/js/jquery.dataTables.min.js" type="text/javascript")
     script(src="/bower_components/datatables-plugins/integration/bootstrap/3/dataTables.bootstrap.min.js" type="text/javascript")
+
+    script(type="text/javascript").
+        $(document).ready(function() {
+            $(".nav a").on("click", function(){
+                $(".nav").find(".active").removeClass("active");
+                $(this).parent().addClass("active");
+            });
+        });

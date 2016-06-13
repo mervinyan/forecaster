@@ -12,6 +12,7 @@ var dashboard = require('./routes/dashboard');
 var accounts = require('./routes/accounts');
 var budgets = require('./routes/budgets');
 var cashflow = require('./routes/cashflow');
+var calendar = require('./routes/calendar');
 
 var forecasts = require('./routes/forecasts');
 var actuals = require('./routes/actuals');
@@ -49,6 +50,7 @@ app.use('/cashflows', cashflow);
 app.use('/accounts', accounts);
 app.use('/forecasts', forecasts);
 app.use('/actuals', actuals);
+app.use('/calendar', calendar);
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {

@@ -8,7 +8,7 @@ block links
     link(href="/stylesheets/style.css" rel="stylesheet" type="text/css")
     
     <!-- Bootstrap Core CSS -->
-    link(href="/bower_components/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet" type="text/css")
+    link(href="/bower_components/bootstrap/dist/css/bootstrap.css" rel="stylesheet" type="text/css")
 
     <!-- DataTables CSS -->
     link(href="/bower_components/datatables-plugins/integration/bootstrap/3/dataTables.bootstrap.css" rel="stylesheet" type="text/css")
@@ -25,30 +25,35 @@ block links
 block content
     div.row
         div.col-md-12
-            h1.page-header #{title}
-    div.row
-        div.col-md-12
             div.panel.panel-default
                 div.panel-heading
-                    form#importActualsForm.form-inline(name='import_actuals' method='post' action='/actuals/import' enctype='multipart/form-data' novalidate)
-                        div.form-group
-                            label.sr-only(for="account_name") Account
-                            input.form-control(type="text" name="account_name" placeholder="Account")
-                        div.form-group
-                            input(type="file"  accept=".csv" name="actuals")
-                        button#import.btn.btn-primary(type="submit") Import Acutals
-                        span#status 
-                    h3.panel-title    
-                        div.pull-right
-                            div.btn-group
-                                button#yearOptions.btn.btn-default.dropdown-toggle.form-control(type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true")
+                    div.row
+                        div.col-md-12
+                            h3.panel-title
+                                strong Transactions
+                            br 
+                    div.row
+                        div.col-md-9
+                            form#importActualsForm.form-inline(name='import_actuals' method='post' action='/actuals/import' enctype='multipart/form-data' novalidate)
+                                div.form-group
+                                    label.sr-only(for="account_name") Account
+                                    input.form-control(type="text" name="account_name" placeholder="Account")
+                                div.form-group
+                                    input(type="file"  accept=".csv" name="actuals")
+                                button#import.btn.btn-primary.btn-sm(type="submit") Import Acutals
+                                span#status 
+                        div.col-md-3
+                            div.btn-group.btn-group-sm.pull-right(role="group")   
+                                a#years.btn.btn-default.dropdown-toggle(role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true")
+                                    | 2016
                                     | 
                                     span.caret
-                                ul.dropdown-menu(aria-labelledby="yearOptions")
-                                    each val in [2016, 2015, 2014, 2013]
+                                ul.dropdown-menu(aria-labelledby="years")
+                                    each val in ['2016', '2015', '2014']
                                         li
                                             a()
-                                                | #{val}                         
+                                                | #{val}                                              
+                         
                 div.panel-body
                     div.dataTable_wrapper
                         table#datatable-actuals.table.table-bordered.table-responsive

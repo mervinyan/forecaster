@@ -19,13 +19,13 @@ router.get('/', function (req, res, next) {
                     accounts.push(account);
                 }
             }
-            res.render('actuals.pug', { title: 'Actuals', 'accounts': accounts });
+            res.render('actuals.pug', { title: 'Transactions', 'accounts': accounts });
         },
         function () {
-            res.render('actuals.pug', { title: 'Actuals', 'accounts': [] });
+            res.render('actuals.pug', { title: 'Transactions', 'accounts': [] });
         },
         function () {
-            res.render('actuals.pug', { title: 'Actuals', 'accounts': [] });
+            res.render('actuals.pug', { title: 'Transactions', 'accounts': [] });
         });
 });
 
