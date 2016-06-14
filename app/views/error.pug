@@ -1,6 +1,32 @@
 extends layout
 
+block links
+
+    <!-- C3 Chart CSS -->
+    link(href='/bower_components/c3/c3.css' rel='stylesheet' type='text/css')
+    
+    link(href="/stylesheets/style.css" rel="stylesheet" type="text/css")
+    
+    <!-- Bootstrap Core CSS -->
+    link(href="/bower_components/bootstrap/dist/css/bootstrap.css" rel="stylesheet" type="text/css")
+
+    <!-- DataTables CSS -->
+    link(href="/bower_components/datatables-plugins/integration/bootstrap/3/dataTables.bootstrap.css" rel="stylesheet" type="text/css")
+
+    <!-- DataTables JQuery CSS -->
+    link(href="/bower_components/datatables-plugins/integration/jqueryui/dataTables.jqueryui.css" rel="stylesheet" type="text/css")
+
+    <!-- DataTables Responsive CSS -->
+    link(href="bower_components/datatables-responsive/css/responsive.dataTables.scss" rel="stylesheet")
+
+    <!-- Custom Fonts -->
+    link(href="/bower_components/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css")
+
 block content
+  //- p.errorMessage= "The following errors occurred:"
+  //- ul  
+  //-   each error in errors
+  //-     li= error.msg
   h1= message
   h2= error.status
   pre #{error.stack}

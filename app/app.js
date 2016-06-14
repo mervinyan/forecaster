@@ -40,6 +40,7 @@ app.use(multer({storage: storage}).single('actuals'));
 // app.use(multer({dest: './uploads'}).single('actuals'));
 app.use(validator())
 app.use(cookieParser());
+// app.use(require('stylus').middleware(__dirname+'/public'));
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', dashboard);
